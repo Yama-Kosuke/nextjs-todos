@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Link from 'next/link'
+import Link from "next/link";
 import Head from "next/head";
 import clsx from "clsx";
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
@@ -18,11 +18,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import TextField from "@material-ui/core/TextField";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -36,8 +32,8 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
-import DeleteIcon from '@material-ui/icons/Delete';
-import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
+import DeleteIcon from "@material-ui/icons/Delete";
+import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 
 const drawerWidth = 240;
 
@@ -96,11 +92,7 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 140,
-  },
+
   table: {
     minWidth: 700,
   },
@@ -206,7 +198,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Todo App</title>
+        <title>TODO App</title>
       </Head>
 
       <div className={classes.root}>
@@ -232,9 +224,13 @@ export default function Home() {
             </IconButton>
             {/*  */}
             {/* タイトル */}
-            <Typography variant="h6" noWrap>
-              Todo App
-            </Typography>
+            <Link href="/">
+              <ListItem button>
+                <Typography variant="h6" noWrap>
+                  TODO App
+                </Typography>
+              </ListItem>
+            </Link>
             {/*  */}
           </Toolbar>
         </AppBar>
@@ -263,22 +259,22 @@ export default function Home() {
 
           {/* ハンバーガーメニュー：項目 */}
           <List>
-              <Link href="/list/list">
-                <ListItem button>
-                  <ListItemIcon>
-                    <FormatListNumberedIcon /> 
-                  </ListItemIcon>
-                  <ListItemText primary= "Todo一覧" />
-                </ListItem>
-              </Link>
-              <Link href="/delete/delete">
-                <ListItem button>
-                  <ListItemIcon>
-                    <DeleteIcon />
-                  </ListItemIcon>
-                  <ListItemText secondary = "削除済みTodo" />
-                </ListItem>
-              </Link>
+            <Link href="/TodoList/TodoList">
+              <ListItem button>
+                <ListItemIcon>
+                  <FormatListNumberedIcon />
+                </ListItemIcon>
+                <ListItemText primary="TODO一覧" />
+              </ListItem>
+            </Link>
+            <Link href="/TodoDelete/TodoDelete">
+              <ListItem button>
+                <ListItemIcon>
+                  <DeleteIcon />
+                </ListItemIcon>
+                <ListItemText secondary="削除済みTODO" />
+              </ListItem>
+            </Link>
           </List>
         </Drawer>
       </div>
