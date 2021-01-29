@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from 'next/link'
 import Head from "next/head";
 import clsx from "clsx";
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
@@ -35,6 +36,8 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+import DeleteIcon from '@material-ui/icons/Delete';
+import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 
 const drawerWidth = 240;
 
@@ -260,13 +263,15 @@ export default function Home() {
 
           {/* ハンバーガーメニュー：項目 */}
           <List>
-            {["Todo登録", "完了済み", "未完了", "削除"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
+            {["Todo一覧", "削除済みTodo"].map((text, index) => (
+              <Link href="/delete/delete">
+                <ListItem button key={text}>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <FormatListNumberedIcon /> : <DeleteIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItem>
+              </Link>
             ))}
           </List>
         </Drawer>
