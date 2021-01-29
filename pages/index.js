@@ -263,16 +263,22 @@ export default function Home() {
 
           {/* ハンバーガーメニュー：項目 */}
           <List>
-            {["Todo一覧", "削除済みTodo"].map((text, index) => (
-              <Link href="/delete/delete">
-                <ListItem button key={text}>
+              <Link href="/list/list">
+                <ListItem button>
                   <ListItemIcon>
-                    {index % 2 === 0 ? <FormatListNumberedIcon /> : <DeleteIcon />}
+                    <FormatListNumberedIcon /> 
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary= "Todo一覧" />
                 </ListItem>
               </Link>
-            ))}
+              <Link href="/delete/delete">
+                <ListItem button>
+                  <ListItemIcon>
+                    <DeleteIcon />
+                  </ListItemIcon>
+                  <ListItemText secondary = "削除済みTodo" />
+                </ListItem>
+              </Link>
           </List>
         </Drawer>
       </div>
