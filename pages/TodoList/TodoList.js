@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import clsx from "clsx";
@@ -26,14 +26,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import DateFnsUtils from "@date-io/date-fns";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
 import DeleteIcon from "@material-ui/icons/Delete";
-import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import HomeIcon from "@material-ui/icons/Home";
 
 const drawerWidth = 240;
@@ -103,19 +96,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function TodoList() {
   const [todos, setTodos] = useState([]);
   const theme = useTheme();
   const classes = useStyles();
   const [tmpTodo, setTmpTodo] = useState("");
-  const addTodo = () => {
-    if (tmpTodo === "") {
-      alert("文字を入力してください");
-      return;
-    }
-    setTodos([...todos, tmpTodo]);
-    setTmpTodo("");
-  };
   const deleteTodo = (index) => {
     const newTodos = todos.filter((todo, todoIndex) => {});
     setTodos(newTodos);

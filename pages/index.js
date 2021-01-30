@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import clsx from "clsx";
@@ -101,6 +101,9 @@ const useStyles = makeStyles((theme) => ({
     width: "30ch",
   },
 }));
+
+export const TodoContext = createContext();
+export const DeleteTodoContext=createContext();
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
