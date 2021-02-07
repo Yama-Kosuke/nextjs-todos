@@ -38,6 +38,7 @@ import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import TodoList from "./TodoList/todoList";
 import TodoDelete from "./TodoDelete/TodoDelete";
 import HeaderLine from "../components/HeaderLine/HeaderLine"
+import TodoAdd from "../components/TodoAdd/TodoAdd"
 
 const drawerWidth = 240;
 
@@ -237,43 +238,8 @@ export default function Home() {
   return (
     <>
       <HeaderLine />
+      <TodoAdd />
       <Container maxWidth="md">
-        <div className="App">
-          <h1>TODO登録</h1>
-        </div>
-        <div>
-          <form className={classes.container} onSubmit={onClickAdd}>
-            <input
-              style={{ width: "400px" }}
-              placeholder="TODOを入力"
-              value={todoText}
-              onChange={onChangeTodoText}
-            />
-
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <Grid container justify="space-around">
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="inline"
-                  format="yyyy/MM/dd"
-                  margin="normal"
-                  id="date-picker-inline"
-                  label="達成期日"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  KeyboardButtonProps={{
-                    "aria-label": "change date",
-                  }}
-                />
-              </Grid>
-            </MuiPickersUtilsProvider>
-
-            <Button variant="contained" onClick={onClickAdd}>
-              追　加
-            </Button>
-          </form>
-          <p style={{ fontSize: "20px" }}></p>
-        </div>
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="customized table">
             <TableHead>
