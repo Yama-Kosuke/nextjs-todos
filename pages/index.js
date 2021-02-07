@@ -37,8 +37,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import TodoList from "./TodoList/todoList";
 import TodoDelete from "./TodoDelete/TodoDelete";
-import HeaderLine from "../components/HeaderLine/HeaderLine"
-import TodoAdd from "../components/TodoAdd/TodoAdd"
+import HeaderLine from "../components/HeaderLine/HeaderLine";
+import TodoAdd from "../components/TodoAdd/TodoAdd";
 
 const drawerWidth = 240;
 
@@ -238,7 +238,7 @@ export default function Home() {
   return (
     <>
       <HeaderLine />
-      <TodoAdd />
+      <TodoAdd todos={todos} setTodos={setTodos} />
       <Container maxWidth="md">
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="customized table">

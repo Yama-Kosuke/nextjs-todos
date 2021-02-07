@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { makeStyles, useTheme, } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
@@ -76,8 +76,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TodoAdd() {
-  const [todos, setTodos] = useState([]);
+export default function TodoAdd( {todos, setTodos}) {
+  useEffect(()=> {
+  console.log(todos,setTodos)
+  setTodos([{todoText: "text"}])
+  },[])
+  console.log(todos)
   const theme = useTheme();
   const classes = useStyles();
   const [tmpTodo, setTmpTodo] = useState("");
