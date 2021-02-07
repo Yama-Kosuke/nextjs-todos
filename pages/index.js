@@ -1,6 +1,7 @@
 import React, { createContext, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import Modal from "react-modal";
 import clsx from "clsx";
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -34,6 +35,8 @@ import {
 } from "@material-ui/pickers";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
+import TodoList from "./TodoList/todoList";
+import TodoDelete from "./TodoDelete/TodoDelete";
 
 const drawerWidth = 240;
 
@@ -102,8 +105,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// モーダルスタイル
+const customStyles = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    width: "400px",
+    height: "150px",
+    transform: "translate(-50%, -50%)",
+  },
+};
+
 export const TodoContext = createContext();
-export const DeleteTodoContext=createContext();
+export const DeleteTodoContext = createContext();
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
@@ -130,6 +154,17 @@ export default function Home() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  // モーダルを開く処理
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  // モーダルを閉じる処理
+  const closeModal = () => {
+    setIsOpen(false);
   };
 
   const StyledTableCell = withStyles((theme) => ({
@@ -286,7 +321,7 @@ export default function Home() {
           <h1>TODO登録</h1>
         </div>
         <div>
-          <form className={classes.container}>
+          <form className={classes.container} onSubmit={onClickAdd}>
             <input
               style={{ width: "400px" }}
               placeholder="TODOを入力"
@@ -352,10 +387,27 @@ export default function Home() {
                     <Button
                       variant="contained"
                       color="secondary"
-                      onClick={() => onClickDelete(index)}
+                      onClick={openModal}
                     >
                       削除
                     </Button>
+                    <Modal
+                      isOpen={modalIsOpen}
+                      onRequestClose={closeModal}
+                      style={customStyles}
+                    >
+                      <h3 align="center">本当に削除しますか？</h3>
+                      <div align="center">
+                        <Button onClick={closeModal}>キャンセル</Button>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={() => onClickDelete(index)}
+                        >
+                          OK
+                        </Button>
+                      </div>
+                    </Modal>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
