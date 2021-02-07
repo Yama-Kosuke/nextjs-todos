@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { TodoContext } from "../index";
 import Link from "next/link";
 import Head from "next/head";
 import clsx from "clsx";
@@ -96,7 +97,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function TodoList() {
   const [todos, setTodos] = useState([]);
   const theme = useTheme();
@@ -181,7 +181,7 @@ export default function TodoList() {
     newListTodos.splice(index, 1);
     setListTodos(newListTodos);
   };
-
+  const todoContext = useContext(TodoContext);
   return (
     <>
       <Head>
@@ -280,7 +280,7 @@ export default function TodoList() {
                 <StyledTableCell align="center"></StyledTableCell>
               </TableRow>
             </TableHead>
-
+            <div>{todoContext}</div>
             <TableBody>
               {listTodos.map((todo, index) => (
                 <StyledTableRow
