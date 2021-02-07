@@ -37,6 +37,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import TodoList from "./TodoList/todoList";
 import TodoDelete from "./TodoDelete/TodoDelete";
+import HeaderLine from "../components/HeaderLine/HeaderLine"
 
 const drawerWidth = 240;
 
@@ -235,87 +236,7 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>TODO App</title>
-      </Head>
-
-      <div className={classes.root}>
-        <CssBaseline />
-        {/* 上部のバー構成 */}
-        <AppBar
-          position="static"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
-          style={{ color: "#e0f2f1", backgroundColor: "#000" }}
-        >
-          <Toolbar>
-            {/* ハンバーガーアイコン */}
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-            {/*  */}
-            {/* タイトル */}
-            <Link href="/">
-              <ListItem button>
-                <Typography variant="h6" noWrap>
-                  TODO App
-                </Typography>
-              </ListItem>
-            </Link>
-            {/*  */}
-          </Toolbar>
-        </AppBar>
-
-        {/* ドロワーメニュー */}
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "ltr" ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton>
-          </div>
-          <Divider />
-          {/*  */}
-
-          {/* ハンバーガーメニュー：項目 */}
-          <List>
-            <Link href="/TodoList/TodoList">
-              <ListItem button>
-                <ListItemIcon>
-                  <FormatListNumberedIcon />
-                </ListItemIcon>
-                <ListItemText primary="TODO一覧" />
-              </ListItem>
-            </Link>
-            <Link href="/TodoDelete/TodoDelete">
-              <ListItem button>
-                <ListItemIcon>
-                  <DeleteIcon />
-                </ListItemIcon>
-                <ListItemText secondary="削除済みTODO" />
-              </ListItem>
-            </Link>
-          </List>
-        </Drawer>
-      </div>
+      <HeaderLine />
       <Container maxWidth="md">
         <div className="App">
           <h1>TODO登録</h1>
