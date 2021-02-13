@@ -135,20 +135,7 @@ export default function Home() {
   const [todos, setTodos] = useState([]);
   const theme = useTheme();
   const classes = useStyles();
-  const [tmpTodo, setTmpTodo] = useState("");
-  const addTodo = () => {
-    if (tmpTodo === "") {
-      alert("文字を入力してください");
-      return;
-    }
-    setTodos([...todos, tmpTodo]);
-    setTmpTodo("");
-  };
-  const deleteTodo = (index) => {
-    const newTodos = todos.filter((todo, todoIndex) => {});
-    setTodos(newTodos);
-  };
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -159,12 +146,15 @@ export default function Home() {
   };
 
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [deleteIndex, setDeleteIndex] = useState();
 
-  // モーダルを開く処理
-  const openModal = () => {
+  // モーダルのstateをtrueに変更（モーダルを開く）＆削除ボタンのid番号をstateに格納処理
+  const openModal = (index) => {
     setIsOpen(true);
+    setDeleteIndex(index);
   };
-  // モーダルを閉じる処理
+
+  // モーダルのstateをfalseに変更（モーダルを閉じる）
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -233,6 +223,8 @@ export default function Home() {
     const newListTodos = [...listTodos];
     newListTodos.splice(index, 1);
     setListTodos(newListTodos);
+    closeModal();
+    console.log(index);
   };
 
   return (
@@ -274,31 +266,31 @@ export default function Home() {
                     <Button
                       variant="contained"
                       color="secondary"
-                      onClick={openModal}
+                      onClick={() => openModal(index)}
                     >
                       削除
                     </Button>
-                    <Modal
-                      isOpen={modalIsOpen}
-                      onRequestClose={closeModal}
-                      style={customStyles}
-                    >
-                      <h3 align="center">本当に削除しますか？</h3>
-                      <div align="center">
-                        <Button onClick={closeModal}>キャンセル</Button>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          onClick={() => onClickDelete(index)}
-                        >
-                          OK
-                        </Button>
-                      </div>
-                    </Modal>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              style={customStyles}
+            >
+              <h3 align="center">本当に削除しますか？</h3>
+              <div align="center">
+                <Button onClick={closeModal}>キャンセル</Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => onClickDelete(deleteIndex)}
+                >
+                  OK
+                </Button>
+              </div>
+            </Modal>
           </Table>
         </TableContainer>
       </Container>
